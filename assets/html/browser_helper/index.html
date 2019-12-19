@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!--所有资源内置，防止安全问题，同时也可以离线使用-->
+    <link rel="icon" type="image/png"
+          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAASAAAAEgARslrPgAAA81JREFUSMfFVX9M1GUY/zzv9xBoZUOD407ix8TJESPazbLZpuRoOeXYISq6VMoYMAwDs8FtTm81xwIHkoVYMfLHULlxA3WluJDVFLfAtTGzYOMQPVBoBeFO7nv3Pv3T9yhuRP+Uzz/v9vl+nuf7vJ/P8+wFHnPQfAR9BsvUqqgoJdH3m1dfWCjCOI/TnE5pF9nUEBfHXv+wuKgoIovCqczl4rdpm3+XxcJeXbQsra8fKSDx8/Hx8bnqi7k+GF6fdpgirVZlndqm3unv509lBG0XQl7E86L88GGU8FdUvnUrLRV3eG1urnwFUdJbW8teTqP8kBBAbVHMAwOG8ekPkuOzsv51A8b06ZLkcxYLLaC1KHA44EAE71cUPEl78M3AAKawH4MZGUFSnkQuvlizhg7BiVKXi76Enq06Hb1Fu/mN1lbjpK8pqXjDhjktiClljikND/cn+ToWvmw2UxfZuTMszD8mJ9k6OqrxlEixkJzR0RoekoIEjiaS98Uvol6vpwpp9lc9eOArQ6e4JqXGRyu/I096PKJIt+Vhfm/v3RqiuzUez4zkqer3Jo/NZjR6vSYTc+D8QY01lRUVGdepu02JLlcAz1O3mIZPnzY+reabdjU3a7ihwVtiSnW7jVb1xSRHcfHseoYG9XJSZXl5sAXV/BTMmZlBEvVTMSKGhjDGlUiNjZ13qu2ohmowsEe+T0VudxAhgePoxMxM6AKJ7fQC4vv6+ADe5R3Dw4GEvXI9LR0ZYRsd4mUOx9/9u3ED3yEUXUJgHx3kDxUlYNVtui7EvXt+K3qlbGmZ+Q9q6cTEBADg1j9swf8VAQXYwjfhSkmhPCSQfeXKQMd1ogbbmppQKW10MycHbizAj0R4jbbjsqpiDNNYLQTsfJDsmzZpef5Ubufx5mY6SxZ6ZgbnJuwEdXfjKJYDf1XgPfodPefPz+6Ql/En+DUuDmbaCxoamu9G/DlVw+x2U7j4iOuNxiDCIA3xjra2GRv/jP96DXk1H6D0R4+U27qMyes9PdoaBhTQADojLwCLFmFKXsDiS5eUh/gYad3d4hrSSUlLw1XZiasdHcoSSiZTRYVsJL04YrNpuAxDvlK8YoWWp9Uhlo3+VRERs/c/aAjdnaF1tza3t/N6PotnN27knbhPTp8PU3wEryYmYhRVGL1yJUjaWjiR0tWFCbyEzNhYLY8b+Sidys52F4ae+WlJsMXzPkbRb7JMrIuMFPt8gyFfFxSIz7hUVra1yeX8BBbHx3MOnlNWCSFGaMzXNzjICu1RNlss/K0uwR9z7Nh8j9Fjjz8AOBDveuBBAwYAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMDUtMDhUMTQ6MTY6NTUrMDg6MDDXwSKxAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTA1LTA4VDE0OjE2OjU1KzA4OjAwppyaDQAAAEp0RVh0c3ZnOmJhc2UtdXJpAGZpbGU6Ly8vaG9tZS9hZG1pbi9pY29uLWZvbnQvdG1wL2ljb25fZTlidG03NXN0Zi9saXVsYW5xaS5zdmeLWds5AAAAAElFTkSuQmCC"/>
+    <script>
+        window.onerror = function () {
+            alert('出错：\n' + JSON.stringify(arguments));
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浏览器助手</title>
+    <style>
+        html, body, #body {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 62.5%;
+        }
+
+        #body * {
+            font-size: 1rem;
+        }
+
+        #body {
+            padding: 2.5rem 1rem 4rem 1rem;
+        }
+
+        button {
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: #fff;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            box-sizing: border-box;
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        input {
+            display: inline-block;
+            border: 1px solid #ced4da;
+            height: calc(1.5em + .5rem + 2px);
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+            font-weight: 400;
+            color: #495057;
+            background-color: #fff;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        input[type="checkbox"] {
+            display: inline-block;
+            height: 1rem;
+            width: 1rem;
+            vertical-align: text-bottom;
+        }
+
+        .edit_title {
+            text-align: center;
+        }
+
+        .editable {
+            border: 0 none;
+            border-bottom: 1px dotted black;
+            outline: none;
+            white-space: pre-wrap;
+            background-color: transparent;
+            display: block;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 10%;
+        }
+
+        .nav_bar {
+            background-color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.5rem 0;
+            border-top: 1px solid lightgray;
+            border-radius: 100%;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .nav_bar .split {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        input.search_url {
+            border: 1px solid lightgrey;
+            padding: 0;
+            width: 4rem;
+            border-radius: 6px;
+            outline: none;
+            text-align: center;
+        }
+
+        .nav_bar input, .nav_bar button {
+            vertical-align: middle;
+        }
+
+        .float_div {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .float_div .holder_line {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .float_div .body {
+            background-color: #eaeaea;
+            border-radius: 10px 10px 0 0;
+            box-sizing: border-box;
+            text-align: left;
+            white-space: nowrap;
+            margin: 0 auto;
+            overflow: auto;
+        }
+
+        .float_div .title {
+            text-align: center;
+            font-size: 1.4rem !important;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: #eaeaea;
+        }
+
+        .float_div .content {
+            text-align: center;
+            margin: 3.4rem 0 5.7rem 0;
+        }
+
+        .float_div .buttons {
+            text-align: center;
+            white-space: nowrap;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #eaeaea;
+            padding-bottom: 0.2rem;
+        }
+
+
+        .float_div .msg {
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+
+        .float_div .notice {
+            color: orange;
+        }
+
+        .float_div .warning {
+            color: #ff4400;
+        }
+
+        .float_div .error {
+            color: red;
+        }
+
+        .float_div .success {
+            color: green;
+        }
+
+        .float_div .float_btn {
+            margin: 0 0.5rem;
+        }
+
+        .status_bar {
+            z-index: 2;
+            width: 100%;
+            position: fixed;
+            right: 0;
+            top: 0;
+            white-space: nowrap;
+            overflow: auto hidden;
+            text-align: left;
+            height: 2rem;
+            box-sizing: content-box;
+            border-bottom: 1px solid lightgrey;
+            padding-left: 0.5rem;
+        }
+
+        .status_bar .msg {
+            border-radius: 12px;
+            margin: 4px 1rem 0 0;
+            display: inline-block;
+            padding: 4px 0.5rem;
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .status_bar .error {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .status_bar .warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .status_bar .success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .bookmark {
+            overflow: auto;
+            max-height: 100%;
+            list-style-type: decimal;
+            margin: 0;
+        }
+
+        .bookmark .line {
+            white-space: nowrap;
+        }
+
+        .bookmark li {
+            padding: 0.6rem;
+        }
+
+        .bookmark a {
+            display: inline-block;
+        }
+
+        .password_box {
+            overflow: auto;
+            max-height: 100%;
+            margin: 0;
+        }
+
+        .password_box .line {
+            line-height: 3rem;
+        }
+
+        .password_box .space {
+            margin-right: 2rem;
+        }
+
+        .password_box p.is_url {
+            font-weight: bold;
+        }
+
+        .password_box a.is_key {
+            display: inline-block;
+            margin-left: 1rem;
+        }
+
+        .no_match {
+            display: none;
+        }
+
+        .block {
+            display: block;
+        }
+
+        button.danger {
+            border: 1px solid #dc3545;
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        button.warning {
+            border: 1px solid #ffc107;
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+
+        button.sec {
+            border: 1px solid #6c757d;
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        hr.full {
+            margin: 0;
+            padding: 0;
+            display: block;
+            overflow: hidden;
+            visibility: hidden;
+            height: 1px;
+        }
+    </style>
+</head>
+<body>
+<div id="body">
+    <status_bar ref="status_bar"></status_bar>
+    <bookmark_list ref="bookmark_list"></bookmark_list>
+    <password_list ref="password_list"></password_list>
+    <more_list ref="more_list"></more_list>
+    <nav_bar ref="nav_bar"></nav_bar>
+    <component v-bind:is="float_div" ref="float_div">
+        <!--根据父组件data.float_div =已全局注册组件名或组件{}动态创建-->
+    </component>
+</div>
+
+<script type="text/html" id="status_bar_tpl">
+    <div class="status_bar" id="status_bar">
+        <template v-for="obj in msg">
+            <b :class="'msg ' + obj.color">{{obj.txt}}</b>
+        </template>
+    </div>
+</script>
+
+<script type="text/html" id="bookmark_list_tpl">
+    <ol v-show="show" class="bookmark">
+        <template v-for="(url, index) in list">
+            <li :key="url" class="filter_item">
+                <a target="_blank" @contextmenu.stop.prevent.self="bookmark_edit(url,$event)"
+                   :href="url">
+                    {{G.D.bookmark[url]}}
+                </a>
+            </li>
+        </template>
+    </ol>
+</script>
+
+<script type="text/html" id="password_list_tpl">
+    <ol v-show="show" class="password_box" style="list-style-type: simp-chinese-informal;">
+
+        <template v-for="(array,index) in list">
+            <li :key="index" class="line filter_item">
+                <p class="is_url">
+                    <a :href="'http://' + G.D.password[array[0]].url" target="_blank">{{G.D.password[array[0]].url}}</a>
+                </p>
+                <ol>
+                    <template v-for="(key, index) in array">
+                        <li>
+                            <a
+                                    class="is_key space"
+                                    @contextmenu.stop.prevent="password_edit(key,$event)"
+                                    @click="password_copy_password(key)" href="javascript:void(0);">🔑</a>
+                            <a @click="password_copy_name(key)" class="space" href="javascript:void(0);">
+                                {{G.D.password[key].user}}
+                            </a>
+                            <sup class="space">({{G.D.password[key].name}})</sup>
+                        </li>
+                    </template>
+                </ol>
+            </li>
+        </template>
+
+    </ol>
+</script>
+
+<script type="text/html" id="more_list_tpl">
+    <div v-show="show" class="more_box">
+
+        <template v-for="obj in list">
+            <p>
+                <button @click="obj.click($root)">{{obj.text}}</button>
+            </p>
+        </template>
+
+    </div>
+</script>
+
+<script type="text/html" id="nav_bar_tpl">
+    <div class="nav_bar">
+
+        <input
+                v-show="!show_more_box"
+                onclick="this.select();" v-model="filter_key_word"
+                class="search_url split"
+                placeholder="筛查">
+
+        <button v-show="show_bookmark_box"
+                class="split " @click="new_bookmark">添书签
+        </button>
+
+        <button @click="new_password" class="split" v-show="show_password_box">添密码</button>
+
+        <button
+                class="split "
+                @click="box_switch"
+                v-show="!show_more_box"
+        >
+            {{show_password_box?'看书签':'看密码'}}
+        </button>
+
+        <button @click="box_switch('more')" class="split ">
+            {{show_more_box?'✖':'☰'}}
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="float_div_tpl">
+    <div class="float_div" v-show="show" @click.self.stop="hide_me($root,$event)">
+        <div class="holder_line">
+            <div class="body"
+                 :style="'max-height: ' + ($root.window_height - $root.status_height) + 'px;max-width:' + $root.window_width + 'px;'">
+                <div class="title">{{title}}</div>
+                <div class="content">
+                    <!--这里不能用template标签,因为vue是对这个dom使用innerHTML-->
+                    <div v-html="form"></div>
+                </div>
+                <div class="buttons">
+                    <div :class="'msg ' + msg_cls">{{msg}}</div>
+                    <template v-for="(b,index) in button">
+                        <button :class="b.class + ' float_btn'"
+                                @click="click_btn(index,$event)"
+                        >
+                            {{b.text}}
+                        </button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/html" id="preview_password_tpl">
+    <div class="edit_title">登录密码：</div>
+    <textarea class="editable" placeholder="这是解开后的密码" readonly="readonly" v-model.trim.lazy="form.password"
+              rows="10"></textarea>
+
+    <div class="edit_title">旧主密码：</div>
+    <input class="editable" :placeholder="form.master_tip" type="password" v-model.trim.lazy="form.master">
+</script>
+
+
+<script type="text/html" id="edit_bookmark_tpl">
+    <div class="edit_title">书签名称：</div>
+    <input class="editable" placeholder="输入名称" v-model.trim.lazy="form.name"/>
+    <div class="edit_title">书签网址：</div>
+    <input type="url" class="editable" placeholder="输入网址" v-model.trim.lazy="form.url"/>
+    <div class="edit_title">
+        <label v-show="form.is_edit"><input type="checkbox" v-model.trim.lazy="form.delete_allow"/> 同意删除</label>
+    </div>
+</script>
+
+<script type="text/html" id="edit_password_tpl">
+    <div class="edit_title">登录网址：</div>
+    <input class="editable" type="url" placeholder="请输入网址" v-model.trim.lazy="form.url">
+
+    <div class="edit_title">登录用户：</div>
+    <input class="editable" placeholder="请输入登录用户名" v-model.trim.lazy="form.user">
+
+    <div class="edit_title">登录密码：</div>
+    <textarea class="editable" placeholder="请输入登录密码" v-model.trim.lazy="form.password"
+              rows="10"
+    ></textarea>
+
+    <div class="edit_title">条目简述：</div>
+    <input class="editable" placeholder="请输入本条目用途" v-model.trim.lazy="form.name">
+
+    <template v-show="form.old_master_show">
+        <div class="edit_title">旧主密码：</div>
+        <input class="editable" type="password" :placeholder="form.old_master_tip" v-model.trim.lazy="form.old_master">
+    </template>
+
+    <div class="edit_title">主密备忘：</div>
+    <input class="editable" placeholder="用来追忆主密码" v-model.trim.lazy="form.master_tip">
+
+    <div class="edit_title">新主密码：</div>
+    <input class="editable" placeholder="用来保护所有密码的" v-model.trim.lazy="form.master">
+
+    <div class="edit_title">
+        <label>
+            <input v-model.trim.lazy="form.over" type="checkbox">
+            覆盖旧的
+        </label>
+        <label v-show="form.is_edit">
+            <input type="checkbox" v-model.trim.lazy="form.delete_allow"/>
+            删除本条
+        </label>
+    </div>
+
+</script>
+
+<script>
+    +function () {
+        "use strict";
+
+        if (!function (ls) {
+            for (let t in ls) {
+                if (ls[t]) {
+                    document.body.innerText = t;
+                    return false;
+                }
+            }
+
+            return true;
+        }({
+            '浏览器不支持JSON，无法使用': !window.JSON,
+            // aes 5种模式说明 https://blog.csdn.net/xiaowang627/article/details/56270206
+            // 见 https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto
+            '浏览器不支持加密，无法使用': !window.crypto,
+            // 因为粘贴之类功能其它浏览器不支持，或是其它浏览器加入其它额外功能
+            '仅支持chrome浏览器': "Google Inc." !== navigator.vendor
+        })) return;
+
+        // vue的计算引用到它时，是通过引用方式来使用的，所以，必须是一个对象，否则其它位置修改它的值时，并没有修改到vue计算方式引用过去的地址上变量
+        let G = {D: {empty: true}};
+        console.log(G);
+
+        window.onbeforeunload = function (e) {
+            if (G.D.empty) return; true;
+
+            e = e || window.event;
+
+            // 兼容IE8和Firefox 4之前的版本
+            if (e) {
+                e.returnValue = '您保存数据了吗？';
+            }
+
+            // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+            return '您保存数据了吗？';
+        };
+
+        /**
+         *
+         * 注意 vue是一个实例的data任意属性变化，就会把整个实例的el渲染一次，并非想像那样，只更新用到这个属性的那部分ui
+         * 所以，要拆细
+         * @var {Function} Vue
+         *
+         */
+        Vue.filter('v_html', function (value) {
+            console.log(value);
+            return value.replace(/&lt;/g, '>').replace(/&gt;/g, '>');
+        });
+
+        Vue['component']('status_bar', {
+            template: '#status_bar_tpl',
+            data: function () {
+                return {
+                    delay: 5,
+                    msg: []
+                };
+            },
+            created: function () {
+                this.success('初始完成');
+                this['$root']['$on']('error', this.error);
+                this['$root']['$on']('warning', this.warning);
+                this['$root']['$on']('success', this.success);
+            },
+            mounted: function () {
+                this['$root'].status_height = document.getElementById('status_bar').offsetHeight;
+            },
+            methods: {
+                error: function (txt) {
+                    return this.add(txt, 'error');
+                },
+
+                warning: function (txt) {
+                    return this.add(txt, 'warning');
+                },
+
+                success: function (txt) {
+                    return this.add(txt, 'success');
+                },
+
+                add: function (txt, color) {
+                    let th = this;
+                    // 添加在前面
+                    this.msg.unshift({
+                        color: color,
+                        txt: txt
+                    });
+                    setTimeout(function () {
+                        th.msg.pop();
+                    }, 1000 * this.delay);
+                }
+            }
+        });
+
+        Vue['component']('bookmark_list', {
+            template: '#bookmark_list_tpl',
+            data: function () {
+                return {
+                    list: [],
+                    show: false,
+                    update: 0
+                };
+            },
+            created: function () {
+                this['$root']['$on']('new_bookmark', this.bookmark_edit);
+                this['$root']['$on']('G.D.update', this.bookmark_sort);
+            },
+            computed: {
+                // 只读属性
+                G: function () {
+                    return G;
+                }
+            },
+            methods: {
+                /** 添加/修改书签*/
+                bookmark_edit: function (key) {
+                    let self = this;
+                    let is_edit = key;
+                    let title = is_edit ? '编辑书签' : '添加书签';
+                    let form = {
+                        name: is_edit ? G.D.bookmark[key] : '',
+                        url: is_edit ? key : '',
+                        delete_allow: false,
+                        is_edit: is_edit,
+                    };
+                    let buttons = [
+                        {
+                            text: '保存',
+                            click: function () {
+                                let float = this;
+                                let name = float.form.name;
+                                let url = float.form.url;
+
+                                if ('' === name) {
+                                    this.error('名称不能留空');
+                                    return;
+                                }
+
+                                if ('' === url) {
+                                    this.error('网址不能留空');
+                                    return;
+                                }
+
+                                if (!/^\w+:.+/.test(url)) {
+                                    this.error('网址无效');
+                                    return;
+                                }
+
+                                if (!G.D.bookmark) G.D.bookmark = {};
+                                G.D.bookmark[url] = name;
+                                this.show = false;
+                                this['$root']['$emit']('success', '已更新');
+                                self.bookmark_sort();
+                            }
+                        },
+                    ];
+
+                    if (is_edit) {
+                        buttons.push(
+                            {
+                                'text': '复制',
+                                click: function () {
+                                    // 放入剪贴板
+                                    let float = this;
+                                    this['$root'].copy(
+                                        key + '#' + G.D.bookmark[key],
+                                        (ok, err) => {
+                                            if (ok) {
+                                                float.show = false;
+                                                return;
+                                            }
+
+                                            float.error('无法复制：' + err);
+                                        }
+                                    );
+                                }
+                            },
+                            {
+                                class: 'danger',
+                                'text': '删除',
+                                click: function () {
+                                    let float = this;
+
+                                    if (!float.form.delete_allow) {
+                                        this.error('请先勾选 - 允许删除');
+                                        return;
+                                    }
+
+                                    if (!G.D.bookmark || !G.D.bookmark[key]) {
+                                        this.error('书签不存在');
+                                        return;
+                                    }
+
+                                    delete G.D.bookmark[key];
+                                    this['$root']['$emit']('success', '删除成功');
+                                    this['$root']['$emit']('G.D.update');
+                                    this.show = false;
+                                }
+                            });
+                    }
+
+                    app.show_float_div(title, form, buttons, 'edit_bookmark_tpl');
+                },
+
+                /** 对书签排序*/
+                bookmark_sort: function () {
+                    if (!G.D.bookmark) return;
+                    let keys = Object.keys(G.D.bookmark);
+                    keys.sort(function (a, b) {
+                        // 按名称顺序
+                        return a.localeCompare(b);
+                    });
+                    // 如果只修改name，key就会相同
+                    this['$set'](this, 'list', keys);
+                    ++this.update;
+                }
+            }
+        });
+
+        Vue['component']('password_list', {
+            template: '#password_list_tpl',
+            data: function () {
+                return {
+                    list: [],
+                    show: false,
+                    update: 0
+                };
+            },
+            created: function () {
+                this['$root']['$on']('new_password', this.password_edit);
+                this['$root']['$on']('G.D.update', this.password_sort);
+            },
+            computed: {
+                // 只读属性 TODO 这个好像只初始一次，并非每次调用时，都取
+                G: function () {
+                    return G;
+                }
+            },
+            methods: {
+                string_to_id: function (str) {
+                    return this['$root'].string_to_id(str);
+                },
+                /** 密码排序*/
+                password_sort: function () {
+                    if (!G.D.password) return;
+                    let keys = Object.keys(G.D.password);
+                    keys.sort(function (a, b) {
+                        /*按网址>用户名顺序*/
+                        return a.localeCompare(b);
+                    });
+                    let list = [];
+                    let tmp = [];
+                    keys.forEach(function (v) {
+                        if (!tmp.length || G.D.password[tmp[0]].url === G.D.password[v].url) {
+                            tmp.push(v);
+                            return;
+                        }
+
+                        list.push(tmp);
+                        tmp = [v];
+                    });
+                    list.push(tmp);
+                    // 比如只调整了备忘的值，那么它的key就会相同，vue就不会更新，所以，要更新update
+                    this['$set'](this, 'list', list);
+                    ++this.update;
+                },
+                password_edit: async function (key) {
+                    let self = this;
+                    let is_empty = function () {
+                        if (!G.D.password) return true;
+
+                        for (let i in G.D.password) {
+                            // 只要有一个个就非空
+                            if ('string' === typeof i)
+                                return false;
+                        }
+
+                        return true;
+                    }();
+                    let is_edit = key;
+                    let title = is_edit ? '编辑密码' : '添加密码';
+                    let form = {
+                        name: is_edit ? G.D.password[key].name : '',
+                        url: is_edit ? G.D.password[key].url : '',
+                        user: is_edit ? G.D.password[key].user : '',
+                        password: '',
+                        master_tip: '',
+                        master: '',
+                        over: false,
+                        is_edit: is_edit,
+                        old_master: '',
+                        // 只要已有密码条目，旧主密码输入就要显示
+                        old_master_show: !is_empty,
+                        old_master_tip: !is_empty ? G.D.master_password_tip : '',
+                        delete_allow: false,// 默认不允许删除
+                        decode_old_password: false
+                    };
+
+                    if (is_edit) {
+                        if (!G.D.password) {
+                            this['$root'].error('数据损坏');
+                            return;
+                        }
+                    }
+
+                    let buttons = [
+                        {
+                            text: '保存',
+                            click: function () {
+                                edit_action['call'](this, 'save');
+                            }
+                        }
+                    ];
+
+                    if (is_edit) {
+                        buttons.unshift(
+                            {
+                                text: '解开',
+                                click: async function () {
+                                    if (!this.form.old_master) {
+                                        this.error('请输入原主密码');
+                                        return;
+                                    }
+
+                                    let password = await self.decrypt(
+                                        self.mix_master_password(this.form.old_master, this.form.url, this.form.user, this.form.name),
+                                        G.D.password[key].password,
+                                        G.D
+                                    );
+
+                                    if (!password) {
+                                        this.error('未能解开密码，请重试');
+                                        return;
+                                    }
+
+                                    this.success('已解开');
+                                    this.form.password = password;
+                                    this.form.decode_old_password = true;
+                                }
+                            }
+                        );
+
+                        buttons.push({
+                            class: 'danger',
+                            text: '删除',
+                            click: function () {
+                                edit_action['call'](this, 'del');
+                            }
+                        });
+                    }
+
+                    this['$root'].show_float_div(title, form, buttons, 'edit_password_tpl');
+
+                    function update_info(data_clone) {
+                        // 更新时间戳,触发提示保存
+                        data_clone.update_human = new Date().toLocaleString();
+                        // 记录更新用户设备
+                        data_clone.user_agent = navigator.userAgent;
+                        data_clone.platform = navigator.platform;
+                    }
+
+                    // 删除或是编辑的实操
+                    async function edit_action(how) {
+                        let float = this;
+                        let is_del = 'del' === how;
+                        let url = float.form.url;
+                        let user = float.form.user;
+                        let over = float.form.over;
+                        let name = float.form.name;
+                        let password = float.form.password;
+                        let master_tip = float.form.master_tip;
+                        let master = float.form.master;
+
+                        if (is_del) {
+                            if (!float.form.delete_allow) {
+                                this.error('请先勾选 - 同意删除');
+                                return;
+                            }
+
+                            if (!G.D.password[key]) {
+                                this.error('条目不存在');
+                                return;
+                            }
+
+                            // 它总是返回true
+                            delete G.D.password[key];
+                            update_info(G.D);
+                            this['$root'].success('更新完成，请及时导出保存');
+                            this.show = false;
+                            this['$root']['$emit']('G.D.update');
+                            // 删除只需要删除条目即可
+                            return true;
+                        }
+
+
+                        if ('' === url) {
+                            this.error('网址未填');
+                            return;
+                        }
+
+                        if ('' === user) {
+                            this.error('用户未填');
+                            return;
+                        }
+
+
+                        if (is_edit) {
+                            if (!this.form.decode_old_password) {
+                                // 未解开过密码，不让保存，防止弄丢了旧密码，只能在它的基础上修改
+                                this.error('请先解开旧密码再修改');
+                                return;
+                            }
+                        }
+
+                        if ('' === password) {
+                            this.error('登录密码未填');
+                            return;
+                        }
+
+                        if ('' === name) {
+                            this.error('条目简述未填');
+                            return;
+                        }
+
+                        if (!is_empty) {
+                            // 一定要旧主密码来解开
+                            if ('' === float.form.old_master) {
+                                this.error('旧主密码未填');
+                                return;
+                            }
+                        }
+
+
+                        if ('' === master_tip) {
+                            this.error('新主密码备忘未填');
+                            return;
+                        }
+
+                        if ('' === master) {
+                            this.error('新主密码未填');
+                            return;
+                        }
+
+                        // 把网址处理成域名
+                        url = this['$root'].url_to_domain(url);
+                        // 尝试克隆
+                        let data_clone = JSON.parse(JSON.stringify(G.D));
+
+                        if (!data_clone.password) data_clone.password = {};
+
+                        if (data_clone.password[self.get_index(url, user)] && !over) {
+                            this.error('网址+用户相同的条目已存在，且禁止覆盖');
+                            return;
+                        }
+
+                        if (!is_empty) {
+                            /** 需要把所有密码解出来，因为需要保证所有密码使用相同方式加密
+                             */
+                            this.error('正在解开所有密码...');
+
+                            for (let url_user in data_clone.password) {
+                                if (!this.form.old_master) {
+                                    this.error('原主密码必须提供');
+                                    return;
+                                }
+
+                                let data = data_clone.password['' + url_user];
+                                let plain_pwd = await self.decrypt(
+                                    self.mix_master_password(this.form.old_master, data.url, data.user, data.name),
+                                    data.password,
+                                    data_clone
+                                );
+
+                                if (!plain_pwd) {
+                                    this.error('解开密码失败，可能旧主密码有误');
+                                    return;
+                                }
+
+                                // 因为这是克隆后的对象，所以，就算这轮有问题，也不会影响
+                                data.password = plain_pwd;
+                            }
+
+                            this.success('解开完成');
+                        }
+
+                        // 若存在直接替换
+                        data_clone.password[self.get_index(url, user)] = {
+                            url: url,
+                            user: user,
+                            password: password,
+                            name: name
+                        };
+
+
+                        self['encrypt_random'](data_clone);
+                        this.notice('正在重新加密所有密码...');
+                        // 重新加密所有密码，不加密域名，用户，只是为了方便查看
+                        for (let url_user in data_clone.password) {
+                            /** @var {Object} url_data */
+                            let data = data_clone.password['' + url_user];
+                            // 只加密密码
+                            let cipher_text = await self.encrypt(
+                                self['mix_master_password'](master, data.url, data.user, data.name),
+                                data.password, data_clone
+                            );
+
+                            if (!cipher_text) {
+                                // 加密中止
+                                this.error('加密失败');
+                                return;
+                            }
+
+                            data.password = cipher_text;
+                        }
+
+                        update_info(data_clone);
+                        data_clone.master_password_tip = master_tip;
+                        // 把新对象放入，通过尝试克隆方式，不是引用
+                        G.D = JSON.parse(JSON.stringify(data_clone));
+                        this['$root'].success('更新完成，请及时导出保存');
+                        this.show = false;
+                        this['$root']['$emit']('G.D.update');
+                    }
+                },
+
+                'password_copy_name': function (key) {
+                    // 点击的是用户名
+                    this['$root'].copy(G.D.password[key].user);
+                },
+
+                //点击密码
+                'password_copy_password': function (key) {
+                    let url = G.D.password[key].url;
+                    let user = G.D.password[key].user;
+                    let name = G.D.password[key].name;
+                    let form = {
+                        master_tip: G.D.master_password_tip,
+                        password: '',
+                        master: ''
+                    };
+                    let old_password = '';
+                    let self = this;
+                    this['$root'].show_float_div('预览密码', form, [
+                        {
+                            text: '解开',
+                            click: async function () {
+                                if (!this.form.master) {
+                                    this.error('请输入原主密码');
+                                    return;
+                                }
+
+                                old_password = await self.decrypt(
+                                    self.mix_master_password(this.form.master, url, user, name),
+                                    G.D.password[key].password,
+                                    G.D
+                                );
+
+                                if (!old_password) {
+                                    this.error('未能解开密码，请重试');
+                                    return;
+                                }
+
+                                this.success('已解开');
+                                this.form.password = old_password;
+                            }
+                        },
+                        {
+                            text: '复制',
+                            click: function () {
+                                if (!old_password) {
+                                    this.error('请先解开密码');
+                                    return;
+                                }
+
+                                this['$root'].copy(old_password);
+                            }
+                        }
+                    ], 'preview_password_tpl');
+                },
+                get_index: function (url, user) {
+                    // 防止出现 ab+ac 与 a +bac 相同的情况
+                    return url + '+' + user;
+                },
+                mix_master_password: function (master_password, url, user, name) {
+                    // 注意顺序不允许调整，否则就会导致不兼容前面数据
+                    return master_password + url + user + name;
+                },
+
+                get_key: async function (password, salt) {
+                    /** 等待返回再下条语句**/
+                    let key = await window.crypto.subtle['importKey'](
+                        "raw",
+                        new TextEncoder().encode(password),
+                        {name: "PBKDF2"},
+                        /* 是否可导出,PBKDF2必须设置成false*/
+                        false,
+                        ["deriveKey"]
+                    );
+
+                    if (!key || 'CryptoKey' !== this.type_of(key)) return false;
+                    /** 等待返回再下条语句**/
+                    key = await window.crypto.subtle.deriveKey(
+                        {
+                            "name": "PBKDF2",
+                            salt: salt,
+                            "iterations": 1000000,
+                            "hash": "SHA-512"
+                        }, key,
+                        /*长度仅允许128或256*/
+                        {name: "AES-CBC", length: 256},
+                        true,
+                        ["encrypt", "decrypt"]
+                    );
+
+                    return !key || 'CryptoKey' !== this.type_of(key) ? false : key;
+                },
+
+                /**
+                 * 改变json中加密的随机数据；注意是直接修改json
+                 * @param {Object} data_json
+                 */
+                encrypt_random: function (data_json) {
+                    data_json.key_salt_array = Array.from(window.crypto.getRandomValues(new Uint32Array(100)));
+                    /*这个必须是设定16bytes,如int8*16，int32*4*/
+                    data_json.iv_array = Array.from(window.crypto.getRandomValues(new Uint8Array(16)));
+                },
+
+                encrypt: async function (password, plain_text, data_json) {
+                    let key;
+
+                    try {
+                        key = await this.get_key(
+                            password,
+                            Uint32Array.from(data_json.key_salt_array)
+                        );
+
+                        if (null === key) {
+                            this['$root'].error('操作被取消');
+                            return null;
+                        }
+
+                        if (false === key) {
+                            this['$root'].error('获取密码出错');
+                            return false;
+                        }
+                    } catch (e) {
+                        this['$root'].error('获取主密码失败：' + e);
+                        return false;
+                    }
+
+                    try {
+                        /**密文,返回的是ArrayBuffer二进制
+                         *@return {ArrayBuffer} */
+                        let cipher_text = await window.crypto.subtle.encrypt(
+                            {
+                                name: "AES-CBC",
+                                /*这个必须是设定16bytes,如int8*16，int32*4*/
+                                iv: Uint8Array.from(data_json.iv_array)
+                            },
+                            key,
+                            new TextEncoder().encode(plain_text)
+                        );
+
+                        if (!cipher_text) {
+                            this['$root'].error('无法加密');
+                            return false;
+                        }
+
+                        return Array.from(new Uint32Array(cipher_text));
+                    } catch (e) {
+                        this['$root'].error('加密失败：' + e);
+                    }
+
+                    return false;
+                },
+
+                /**
+                 * 解密
+                 * @param {String} password
+                 * @param  cipher_text
+                 * @param {Object} data_json
+                 * @return {Promise<string|boolean>}
+                 */
+                decrypt: async function (password, cipher_text, data_json) {
+                    if ('Array' !== this.type_of(cipher_text))
+                        return false;
+                    let key;
+
+                    try {
+                        key = await this.get_key(password, Uint32Array.from(data_json.key_salt_array));
+
+                        if (null === key) {
+                            this['$root'].error('操作被取消');
+                            return null;
+                        }
+
+                        if (false === key) {
+                            this['$root'].error('获取密码出错');
+                            return false;
+                        }
+                    } catch (e) {
+                        this['$root'].error('获取主密码失败：' + e);
+                        return false;
+                    }
+
+                    if (!key) return false;
+                    let iv = Uint8Array.from(data_json.iv_array);
+                    cipher_text = Uint32Array.from(cipher_text).buffer;
+                    let result;
+
+                    try {
+                        result = await window.crypto.subtle.decrypt(
+                            {
+                                name: "AES-CBC",
+                                iv: iv
+                            },
+                            key,
+                            cipher_text
+                        );
+                    } catch (e) {
+                        this['$root'].error('解密失败：' + e);
+                        return false;
+                    }
+
+                    if (!result || 'ArrayBuffer' !== this.type_of(result)) return false;
+                    return new TextDecoder().decode(result);
+                },
+
+                type_of: function (o) {
+                    return Object.prototype.toString.call(o).split(' ')[1]
+                        .replace(']', '');
+                }
+            }
+        });
+
+        Vue['component']('more_list', {
+            template: '#more_list_tpl',
+            data: function () {
+                return {
+                    list: [
+                        {
+                            text: '导入',
+                            click: function ($root) {
+                                let input = document.getElementById('file');
+
+                                if (input) {
+                                    input.onchange = null;
+                                    input.remove();
+                                }
+
+                                input = document.createElement('INPUT');
+                                input.type = 'file';
+                                input.name = 'file';
+                                // chrome在比较多的文件目录中打开时会比较卡
+                                input.setAttribute('accept', "application/json");
+                                input.style.display = 'none';
+                                input.id = 'file';
+                                input.onchange = function () {
+                                    if (!this.files.length) {
+                                        return false;
+                                    }
+
+                                    let file = this.files[0];
+
+                                    if (!/.+\.json$/.test(file.name)) {
+                                        $root.error('必须是.json格式文件');
+                                        return;
+                                    }
+
+                                    if (!file.size) {
+                                        $root.error('无效文件');
+                                        return;
+                                    }
+
+                                    let reader = new FileReader();
+                                    reader.onerror = function (event) {
+                                        $root.error('读取内容失败:' + event.target['error']);
+                                    };
+                                    reader.onload = function (event) {
+                                        let text = event.target['result'];
+
+                                        function set_json(t) {
+                                            try {
+                                                if (!JSON.parse(t))
+                                                    $root.error('无法导入：解析失败');
+                                                // 不要引用的方式
+                                                G.D = JSON.parse(t);
+                                                $root['$emit']('G.D.update');
+                                                $root.success('导入成功');
+                                                $root['$refs']['nav_bar']['box_switch']('more');
+                                            } catch (e) {
+                                                $root.error('解析数据出错：' + e);
+                                            }
+                                        }
+
+                                        if (G.D.empty) {
+                                            // 空的，不用提醒
+                                            set_json(text);
+                                            return;
+                                        }
+
+                                        $root['show_float_div'](
+                                            '操作确认对话框',
+                                            '<div class="text">您确认要替换当前数据吗？</div>',
+                                            [{
+                                                class: 'danger',
+                                                text: '确认',
+                                                click: function () {
+                                                    set_json(text);
+                                                    this.show = false;
+                                                }
+                                            }]
+                                        );
+                                    };
+                                    reader.readAsText(file, 'utf-8');
+                                };
+                                document.body.appendChild(input);
+                                input.click();
+                            }
+                        },
+                        {
+                            text: '导出',
+                            click: function ($root) {
+                                let data = JSON.stringify(G.D, null, 4);
+
+                                if (/^\s*$|^{}$/.test(data)) {
+                                    $root.success('暂无数据');
+                                    return;
+                                }
+
+
+                                let a = document.createElement('a');
+                                a.style.display = 'none';
+                                let date = new Date();
+                                let file_name = ''
+                                    + String(date.getMilliseconds()).padStart(3, '0')
+                                    + '.'
+                                    + String(date.getSeconds()).padStart(2, '0')
+                                    + '.'
+                                    + String(date.getMinutes()).padStart(2, '0')
+                                    + '.'
+                                    + String(date.getHours()).padStart(2, '0')
+                                    + ' '
+                                    + String(date.getDate()).padStart(2, '0')
+                                    + '.'
+                                    + String(1 + date.getMonth()).padStart(2, '0')
+                                    + '.'
+                                    + date.getFullYear()
+                                    + '.json';
+                                a.setAttribute('download', file_name);
+                                a.href = URL.createObjectURL(new Blob([data], {type: 'application/json'}));
+                                document.body.appendChild(a);
+                                a.click();
+
+                                setTimeout(function () {
+                                    // 要主动释放，防止占用内存
+                                    URL.revokeObjectURL(a.href);
+                                    a.remove();
+                                    a = null;
+                                }, 60 * 1000);
+                            }
+                        },
+                        {
+                            text: '打开微云',
+                            click: function () {
+                                window.open('https://www.weiyun.com/disk/', '_blank');
+                            }
+                        }
+                    ],
+                    show: true
+                };
+            },
+            methods: {}
+        });
+
+        // 下方导航vue实例
+        Vue['component']('nav_bar', {
+            template: '#nav_bar_tpl',
+            data: function () {
+                return {
+                    // 更多操作默认不显示
+                    show_more_box: true,
+                    // 密码列表默认不显示
+                    show_password_box: false,
+                    // 书签默认显示
+                    show_bookmark_box: false,
+                    filter_key_word: ''
+                };
+            },
+            watch: {
+                // 同步更多操作vue实例状态
+                show_more_box: function (bool) {
+                    this['$parent']['$refs']['more_list'].show = bool;
+                },
+                // 同步密码列表vue实例状态
+                show_password_box: function (bool) {
+                    this['$parent']['$refs']['password_list'].show = bool;
+                },
+                // 同步书签列表vue实例状态
+                show_bookmark_box: function (bool) {
+                    this['$parent']['$refs']['bookmark_list'].show = bool;
+                },
+                'filter_key_word': function (val) {
+                    let cls_found = 'no_match';
+                    document.querySelectorAll('.' + cls_found)
+                        .forEach(function (dom) {
+                            dom.className = dom.className.replace(new RegExp('(^|\\s)' + cls_found + '(\\s|$)', 'g'), '');
+                        });
+
+                    document.querySelectorAll('.filter_item')
+                        .forEach(function (dom) {
+                            if (dom.innerText.indexOf(val) > -1) {
+                                return;
+                            }
+
+                            // 隐藏不符合的
+                            dom.className += ' ' + cls_found;
+                        });
+                }
+            },
+            methods: {
+                // 切换书签列表、密码列表、更多操作
+                'box_switch': function (who) {
+                    let show_name, th = this;
+
+                    if ('more' === who) {
+                        // 点击了显示更多按钮
+                        show_name = this.show_more_box ? 'show_bookmark_box' : 'show_more_box';
+                    } else {
+                        show_name = this.show_password_box ? 'show_bookmark_box' : 'show_password_box';
+                    }
+
+                    ['show_bookmark_box', 'show_password_box', 'show_more_box'].forEach(function (v) {
+                        th[v] = v === show_name;
+                    });
+                },
+                // 新建书签
+                'new_bookmark': function () {
+                    this['$root']['$emit']('new_bookmark');
+                },
+
+                'new_password': function () {
+                    this['$root']['$emit']('new_password');
+                }
+            }
+        });
+
+        /**
+         * this['$refs']只有在子组件created时才会生效，
+         * 它并非是等子组件创建好再创建vue实例,所以可能要考虑回调方式来处理
+         */
+        let app = new Vue({
+            el: '#body',
+            data: {
+                float_div: null,
+                window_height: window.innerHeight,
+                window_width: window.innerWidth,
+                status_height: 0
+            },
+            /**
+             * 这个状态，无法保证this.$refs.float_div存在
+             */
+            created: function () {
+                let self = this;
+                window.onresize = function () {
+                    self.window_height = window.innerHeight;
+                    self.window_width = window.innerWidth;
+                };
+            },
+            methods: {
+                console: function () {
+                    console.log.apply(console, arguments);
+                },
+                trim: function (txt) {
+                    return String(txt).replace(/^\s+|\s+$/g, '');
+                },
+                // 网址得到域名
+                url_to_domain: function (url) {
+                    return this.trim(url).replace(/^[^:]*:\/*|[\/#?].*$/g, '');
+                },
+
+                string_to_id: function (string) {
+                    return btoa(encodeURIComponent(string))
+                        .replace(/\+/g, '_')
+                        .replace(/\//g, '-')
+                        .replace(/=/g, '');
+                },
+                error: function (txt) {
+                    this['$emit']('error', txt);
+                },
+                notice: function (txt) {
+                    this['$emit']('notice', txt);
+                },
+                success: function (txt) {
+                    this['$emit']('success', txt);
+                },
+                copy: function (str, cb) {
+                    let self = this;
+                    // 要是人工没有点击body获得焦点就无法复制
+                    navigator.clipboard["writeText"]('' + str)
+                        .then(function () {
+                            self['$emit']('success', '已复制');
+                            cb && cb.call(self, true);
+                        })
+                        .catch(err => {
+                            self['$emit']('error', '无法复制：' + err);
+                            cb && cb.call(self, false, err);
+                        });
+                },
+                //初始化浮层的配置
+                show_float_div: function (title, form, button, body_tpl_id, on_close) {
+                    let tpl = document.getElementById('float_div_tpl').innerHTML;
+
+                    if (body_tpl_id) {
+                        body_tpl_id = document.getElementById(body_tpl_id);
+                        // 合并模板，因为vue不支持动态渲染。只能实例前处理
+                        tpl = tpl.replace(/<div\s+v-html="form">\s*<\/div>/, body_tpl_id.innerHTML);
+                    }
+
+                    if (!button) button = [];
+                    button.push({
+                        class: 'sec',
+                        text: '放弃',
+                        click: function () {
+                            this.show = false;
+                        }
+                    });
+                    this.float_div = {
+                        template: tpl,
+                        data: function () {
+                            return {
+                                title: title,
+                                form: form,
+                                button: button,
+                                msg: null,
+                                msg_cls: null,
+                                show: true,
+                                on_close: on_close
+                            };
+                        },
+                        props: ['window_height', 'window_width'],
+                        watch: {
+                            // 关闭时，执行收尾工作
+                            'show': function (show) {
+                                if (!show) {
+                                    // 有关闭处理事件
+                                    this.on_close && this.on_close.call(this);
+                                    // 清理相关
+                                    this.button = null;
+                                    this.on_close = null;
+                                    // 删除本实例
+                                    this['$root'].float_div = null;
+                                }
+                            }
+                        },
+                        methods: {
+                            'hide_me': function () {
+                                this.show = false;
+                            },
+                            'click_btn': function (index, e) {
+                                let click = button[index].click;
+                                click && click.call(this, e);
+                            },
+                            notice: function (html) {
+                                this.show_msg(html, 'notice');
+                            },
+                            error: function (html) {
+                                this.show_msg(html, 'error');
+                            },
+                            success: function (html) {
+                                this.show_msg(html, 'success');
+                            }, show_msg: function (html, cls) {
+                                this['msg_cls'] = cls;
+                                this.msg = html;
+                            },
+                        }
+                    };
+                    return this;
+                }
+            }
+        });
+    }();
+</script>
+</body>
+</html>

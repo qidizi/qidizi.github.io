@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<div class="posts">
+    {% for post in site.posts %}
+    <!--https://help.shopify.com/en/themes/liquid/objects/for-loops#forloop-index-->
+    <article class="post">
+        <h2>{{ forloop.index }}. <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+        <h6>{{ post.date | date: "%Y.%m.%d %H:%M:%S" }}</h6>
+    </article>
+    {% endfor %}
+</div>
