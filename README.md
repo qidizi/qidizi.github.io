@@ -1,4 +1,4 @@
-[点此访问blog](https://qidizi.github.io/)   
+[点此访问blog](https://www.qidizi.com/)   
 
 ___
 ## 在本地预览效果操作步骤：   
