@@ -12,7 +12,7 @@ timezone: Asia/Shanghai  # 指定时区
 description: 个人博客
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://avatars1.githubusercontent.com/u/3324382
+avatar: /assets/images/404.jpg
 
 #
 # Flags below are optional
