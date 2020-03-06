@@ -10,8 +10,11 @@ tags: [LetsEncrypt, ssl, https, 证书]
 1. mac使用brew 安装，centos使用yum安装  
 1. 执行以下命名，输入域名，在域名解析上加入提示的txt类型记录，一路确认下去即可完成，最后在nginx上配置使用即可：  
 
-```
+```bash
 # 因为mac上使用root执行比较麻烦，所以，指定了它需要的所有目录为当前登录可以写入目录，省去要切换到root的麻烦操作   
-certbot certonly --manual --preferred-challenge dns --config-dir /usr/local/etc/letsencrypt --work-dir /usr/local/etc/letsencrypt --logs-dir /usr/local/var/log/
+# --cert-name qidizi 表示指定输出证书的文件名，否则使用默认规则来命名，也可以看成把所有域名/证书放在一个文件中
+
+certbot certonly --cert-name qidizi --manual --preferred-challenge dns --config-dir /usr/local/etc/letsencrypt --work-dir /usr/local/etc/letsencrypt --logs-dir /usr/local/var/log/
 
 ```
+
