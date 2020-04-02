@@ -231,10 +231,11 @@
         return {width: x1 + x2, height: y1 + y2};
     }
 
-
-    if (navigator.userAgent.indexOf(' MicroMessenger/')) {
-        document.body.innerHTML = '微信无法保存图片，请在浏览器中打开以下网址：<br><br>' + location.href;
-    }
+    window.onload = function (ev) {
+        if (navigator.userAgent.indexOf(' MicroMessenger/') > 0) {
+            document.body.innerHTML = '微信无法保存图片，请在浏览器中打开以下网址：<br><br>' + location.href;
+        }
+    };
 </script>
 </body>
 </html>
