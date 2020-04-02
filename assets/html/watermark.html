@@ -72,6 +72,7 @@
 <div id="show"></div>
 
 <script>
+
     let img_base64 = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3aXRo' +
         'IEdJTVD/4gKwSUNDX1BST0ZJTEUAAQEAAAKgbGNtcwQwAABtbnRyUkdCIFhZWiAH5AAEAAIAAQAtACJhY3NwQVBQTAAAAA' +
         'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWxjbXMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
@@ -230,6 +231,10 @@
         return {width: x1 + x2, height: y1 + y2};
     }
 
+
+    if (navigator.userAgent.indexOf(' MicroMessenger/')) {
+        document.write('微信无法保存图片，请在浏览器中打开以下网址：<br><br>' + location.href);
+    }
 </script>
 </body>
 </html>
