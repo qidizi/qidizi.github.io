@@ -233,7 +233,9 @@
 
     window.onload = function (ev) {
         if (navigator.userAgent.indexOf(' MicroMessenger/') > 0) {
-            document.body.innerHTML = '微信无法保存图片，请在浏览器中打开以下网址：<br><br>' + location.href;
+            document.body.innerHTML = '微信无法保存图片，请在浏览器中打开以下网址：<br><br>'
+                // 微信会添加多余的参数
+                + location.href.replace(location.search, '');
         }
     };
 </script>
