@@ -233,7 +233,7 @@
 
 
     if (navigator.userAgent.indexOf(' MicroMessenger/')) {
-        document.write('微信无法保存图片，请在浏览器中打开以下网址：<br><br>' + location.href);
+        document.body.innerHTML = '微信无法保存图片，请在浏览器中打开以下网址：<br><br>' + location.href;
     }
 </script>
 </body>
