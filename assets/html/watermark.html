@@ -1,0 +1,235 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片加水印</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        input,
+        select {
+            width: 60px;
+            border: 1px solid lightgrey;
+            margin-right: 20px;
+            padding: 5px;
+        }
+
+        #watermark {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #show {
+            margin-top: 20px;
+        }
+
+        #upload {
+            border: 0 none;
+            background-color: darkgray;
+            color: black;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<label>
+    <input type="file" accept="image/*" id="upload">
+</label>
+<label>
+    <select id="color">
+        <option value="black">黑色</option>
+        <option value="white">白色</option>
+        <option value="red">红色</option>
+        <option value="yellow">黄色</option>
+        <option value="blue">蓝色</option>
+        <option value="gray">灰色</option>
+        <option value="orange">橙色</option>
+    </select>
+</label>
+<label>
+    文字大小
+    <input
+            type="number" max="300" min="20" step="2" id="font_size" value="30" placeholder="请输入字体大小">
+</label>
+<label>
+    透明度
+    <input
+            type="number" max="1" min="0.01" step="0.01" id="alpha" value="0.2" placeholder="请选择透明度">
+</label>
+<a id="download">下载图片</a>
+<label>
+    <input type="text" placeholder="添加水印文字" id="watermark" value="水印">
+</label>
+<div id="show"></div>
+
+<script>
+    let img_base64 = 'data:image/jpeg;base64,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' +
+        'BEQAhkf/aAAgBAQABPxDqBNnA2yUsIAZ//9k=';
+    let canvas = document.createElement("canvas");
+    document.querySelector('#show').appendChild(canvas);
+    document.querySelector('#upload').addEventListener('change', function () {
+        if (!this.value) return;
+        let reader = new FileReader();
+        reader.onload = function (evt) {
+            img_base64 = evt.target.result;
+            draw_watermark();
+        };
+        reader.readAsDataURL(this.files[0]);
+    });
+    draw_watermark();
+    document.getElementById('color').onchange =
+        document.getElementById('font_size').onchange =
+            document.getElementById('watermark').onchange =
+                document.getElementById('alpha').onchange =
+                    draw_watermark;
+
+    function draw_watermark() {
+        let img = new Image();
+        // 设定宽度，高度自适应
+        img.width = 800;
+        img.onload = function () {
+            // 清空画布
+            let ctx_watermark = canvas.getContext("2d");
+            ctx_watermark.clearRect(0, 0, canvas.width, canvas.height);
+            // 按图片大小重置画布大小
+            canvas.width = img.width;
+            canvas.height = img.height;
+            // 把图片载入画布
+            ctx_watermark.drawImage(this, 0, 0, canvas.width, canvas.height);
+            document.body.removeChild(img);
+            img = null;
+            // 新图层
+            // let ctx_watermark = canvas.getContext("2d");
+            // 左上角不动，右向上旋转10度
+            let radian = -10 * Math.PI / 180;
+            ctx_watermark.rotate(radian);
+            ctx_watermark.globalAlpha = +document.getElementById('alpha').value || 0.2; //默认不透明度0.6
+            ctx_watermark.textAlign = 'left';
+            ctx_watermark.font = (+document.querySelector('#font_size').value || 11) + 'pt serif';
+            ctx_watermark.fillStyle = document.querySelector('#color').value.trim() || 'black';
+            let text = document.querySelector('#watermark').value.trim();
+            let text_width = ctx_watermark.measureText(text).width;
+            // 很重要，计算出来的字体高度才准确
+            ctx_watermark.textBaseline = 'top';
+            // 获取文本高度
+            let text_height = getTextHeight(ctx_watermark.font);
+            text_height = text_height.height + text_height.ascent;
+            let text_rect = get_rect(canvas.height, canvas.width, radian);
+            let text_rect_width = text_rect.width;
+            let text_rect_height = text_rect.height;
+            let left = -5000;
+            let top = -1000;
+            let new_width = canvas.width + 10000;
+            let new_height = canvas.height + 10000;
+            ctx_watermark.translate(left, top);
+            //console.log(canvas.width , text_rect_width, text_rect_height , canvas.height)
+            // 间隔
+            let margin = 30;
+            for (let x = 0; x <= new_width; x += text_width + margin) {
+                for (let y = 0; y <= new_height; y += text_height + margin) {
+                    ctx_watermark.fillText(
+                        text,
+                        x,
+                        y
+                    );
+                    // ctx_watermark.rect(x, y, text_width, text_height);
+                    // ctx_watermark.stroke();
+                    //break;
+                }
+            }
+            let download_img = new Image();
+            download_img.src = canvas.toDataURL("image/jpeg", 0.92); //canvas内容提取为图片
+            let date = new Date();
+            document.querySelector('#download').setAttribute('download',
+                '水印-' + date.getFullYear() + '.'
+                + (date.getMonth() + 1).toString().padStart(2, '0') + '.'
+                + date.getDate().toString().padStart(2, '0') + '.'
+                + date.getHours().toString().padStart(2, '0') + '_'
+                + date.getMinutes().toString().padStart(2, '0') + '_'
+                + date.getSeconds().toString().padStart(2, '0')
+                + '.jpg'
+            );
+            document.querySelector('#download').setAttribute('href', download_img.src);
+        };
+        // 只有载入img dom才能正常拿到图片大小
+        document.body.appendChild(img);
+        img.src = img_base64;
+    }
+
+
+    // https://stackoverflow.com/questions/1134586/how-can-you-find-the-height-of-text-on-an-html-canvas
+    function getTextHeight(font) {
+        let text = document.createElement('span');
+        text.innerHTML = 'Hg中';
+        text.style.fontFamily;
+        let block = document.createElement('div');
+        block.style.display = 'inline-block';
+        block.style.width = '1px';
+        block.style.height = '0px';
+
+        let div = document.createElement('div');
+        div.appendChild(text);
+        div.appendChild(block);
+        div.style.position = 'absolute';
+        div.style.top = '-1000px';
+        document.body.appendChild(div);
+        let result = {};
+
+        try {
+
+            block.style.verticalAlign = 'baseline';
+            result.ascent = block.offsetTop - text.offsetTop;
+
+            block.style.verticalAlign = 'bottom';
+            result.height = block.offsetTop - text.offsetTop;
+
+            result.descent = result.height - result.ascent;
+
+        } finally {
+            div.remove();
+        }
+
+        return result;
+    }
+
+    // 获取旋转后矩形的最小水平矩形区域
+    function get_rect(height, width, angle) {
+        // 角度转弧度
+        let radian = Math.PI / 180 * angle;
+        let y1 = width * Math.sin(radian);
+        let y2 = height * Math.cos(radian);
+        let x1 = height * Math.sin(radian);
+        let x2 = width * Math.cos(radian);
+        return {width: x1 + x2, height: y1 + y2};
+    }
+
+</script>
+</body>
+</html>
