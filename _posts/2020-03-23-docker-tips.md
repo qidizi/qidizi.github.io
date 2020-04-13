@@ -28,3 +28,24 @@ tags: [docker, 心得]
 而要进入这个虚拟机内部目前操作方式是`screen ～/Library/Containers/com.docker.docker/Data/vms/0/tty`，关于screen用法自行百度，类似于ssh； 
 然后就能找到`/var/lib/docker`，就可以在这里修改container的配置json   
 
+
+## container中使用主机的代理   
+
+主机的代理只能监听在127.0.0.1下，而不是lan，导致无法在docker容器中使用；   
+开始尝试使用nginx做转发，最后发现nginx只适合做反向代理，而不适合做代理服务器（正向）；   
+于是安装了tinyproxy来做中转代理服务器；  
+启用方式1可以编辑`~/.docker/config.json`,加入以下段（注意要重启docker服务和container，仅重启container无效）    
+
+```
+"proxies":
+ {
+   "default":
+   {
+     "httpProxy": "http://127.0.0.1:3001",
+     "httpsProxy": "http://127.0.0.1:3001",
+     "noProxy": "*.test.example.com,.example2.com"
+   }
+ }
+```   
+
+或是`export http_proxy="....";export https_proxy="....`,在当前环境下可用；  
