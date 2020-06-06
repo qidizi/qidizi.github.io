@@ -27,7 +27,7 @@
             v.onplay = function () {
                 let vw = this.videoWidth;
                 let vh = this.videoHeight;
-                alert('最大像素:' + vw + '*' + vh + '=' + (vw * vh));
+                document.title = '最大像素:' + vw + '*' + vh + '=' + (vw * vh / 10000) + '万';
             };
             v.srcObject = MediaStream;
         }).catch(function (PermissionDeniedError) {
