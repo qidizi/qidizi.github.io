@@ -9,7 +9,7 @@
     </style>
 </head>
 <body>
-<video src="" id="v"></video>
+<video src="" id="v" controls="controls" autoplay="autoplay"></video>
 <script>
     !navigator.getUserMedia ?
         alert('浏览器不支持调用摄像头,请换firefox或是chrome测试') :
@@ -27,7 +27,7 @@
             v.onplay = function () {
                 let vw = this.videoWidth;
                 let vh = this.videoHeight;
-                alert('最大像素:' + vw + '*' + vh + '=' + (v * vh));
+                alert('最大像素:' + vw + '*' + vh + '=' + (vw * vh));
             };
             v.srcObject = MediaStream;
         }).catch(function (PermissionDeniedError) {
