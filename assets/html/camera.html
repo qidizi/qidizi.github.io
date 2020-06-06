@@ -4,11 +4,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1000000, minimum-scale=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>测试相机-请允许调用摄像头与音频</title>
+    <title>测试相机</title>
     <style>
     </style>
 </head>
 <body>
+    <p id="tip" style="color:red;">请允许调用摄像头与音频</p>
 <video src="" id="v" controls="controls" autoplay="autoplay"></video>
 <script>
     !navigator.getUserMedia ?
@@ -27,7 +28,7 @@
             v.onplay = function () {
                 let vw = this.videoWidth;
                 let vh = this.videoHeight;
-                document.title = '最大像素:' + vw + '*' + vh + '=' + (vw * vh / 10000) + '万';
+                document.getElementById('tip').innerHTML = '最大像素:' + vw + '*' + vh + '=' + (vw * vh / 10000) + '万';
             };
             v.srcObject = MediaStream;
         }).catch(function (PermissionDeniedError) {
