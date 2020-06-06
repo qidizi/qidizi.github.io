@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1000000, minimum-scale=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试相机</title>
+    <style>
+    </style>
+</head>
+<body>
+<video src="" id="v"></video>
+<script>
+    !navigator.getUserMedia ?
+        alert('浏览器不支持调用摄像头,请换firefox或是chrome测试') :
+        navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: {
+                width: {ideal: 100000},
+                height: {ideal: 100000}
+            },
+        }).then(function (MediaStream) {
+            let v = document.getElementById('v');
+            v.onloadedmetadata = function (e) {
+                this.play();
+            };
+            v.onplay = function () {
+                let vw = this.videoWidth;
+                let vh = this.videoHeight;
+                alert('最大像素:' + vw + '*' + vh + '=' + (v * vh));
+            };
+            v.srcObject = MediaStream;
+        }).catch(function (PermissionDeniedError) {
+            // 异常可能值见  https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia
+            alert('请求摄像头来拍照失败:\n' + PermissionDeniedError.name + ": " + PermissionDeniedError.message);
+        });
+</script>
+</body>
+</html>
