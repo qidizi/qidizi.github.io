@@ -12,13 +12,12 @@
     <p id="tip" style="color:red;">请允许调用摄像头与音频</p>
 <video src="" id="v" controls="controls" autoplay="autoplay"></video>
 <script>
-    !navigator.getUserMedia ?
-        alert('浏览器不支持调用摄像头,请换firefox或是chrome测试') :
-        navigator.mediaDevices.getUserMedia({
+    try{
+    navigator.mediaDevices.getUserMedia({
             audio: true,
             video: {
-                width: {ideal: 100000},
-                height: {ideal: 100000}
+                width: {ideal: 10000},
+                height: {ideal: 10000}
             },
         }).then(function (MediaStream) {
             let v = document.getElementById('v');
@@ -35,6 +34,10 @@
             // 异常可能值见  https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia
             alert('请求摄像头来拍照失败:\n' + PermissionDeniedError.name + ": " + PermissionDeniedError.message);
         });
+        
+    }catch(e){
+        alert('浏览器不支持调用摄像头,请换firefox或是chrome测试,原因:'+ e);
+    }
 </script>
 </body>
 </html>
