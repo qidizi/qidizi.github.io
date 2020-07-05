@@ -11,7 +11,7 @@
     document.getElementsByTagName('HEAD')[0].appendChild(res);
     // 加载vue js
     res = document.createElement('SCRIPT');
-    res.src = "vue.js";
+    res.src = "https://cdn.jsdelivr.net/npm/vue";
     res.setAttribute('type', "text/javascript");
     res.onload = new_app;
     document.getElementsByTagName('HEAD')[0].appendChild(res);
