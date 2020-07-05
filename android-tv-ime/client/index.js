@@ -26,7 +26,8 @@ function new_app() {
             toast: '',
             media_url: '',
             text: '',
-            media_list: []
+            media_list: [],
+            filter: ''
         },
         mounted() {
             // 加载播放列表
@@ -36,9 +37,25 @@ function new_app() {
             document.getElementsByTagName('HEAD')[0].appendChild(res);
         },
         methods: {
-            post(json, callback) {
+            set_media_list(str) {
+                let tmp = [];
+                str.split('\n').forEach(function (v) {
+                    v = v.trim();
+                    if (!v) return;
+                    let url;
+                    v = v.replace(/\w+:\/\/.+$/, function ($0) {
+                        url = $0;
+                        return '';
+                    });
+                    tmp.push([v.trim(), url]);
+                });
+                this.media_list = tmp;
+            },
+            go_to_top() {
+                window.scrollTo(0, 0);
+            },
+            xhr(data, callback) {
                 let self = this;
-                json = JSON.stringify(json);
                 if (!window.XMLHttpRequest) {
                     this.toast = '浏览器不支持【XMLHttpRequest】';
                     return;
@@ -69,14 +86,15 @@ function new_app() {
                 xhr.onabort = xhr.onerror = function () {
                     if (!done) {
                         done = true;
-                        self.toast = "连接电视端失败,错误描述:" + xhr.statusText + '['
-                        xhr.status + ']';
+                        self.toast = "连接电视端失败,错误描述:" + xhr.statusText + '[' + xhr.status + ']';
                     }
                 };
                 let url = 'http://' + location.host + '/?r=' + +new Date;
-                xhr.open('POST', url);
-                xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
-                xhr.send(json);
+                let is_file = data instanceof File;
+                xhr.open(is_file ? 'PUT' : "POST", url);
+                if (!is_file)
+                    xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
+                xhr.send(is_file ? data : JSON.stringify(data));
             },
             upload() {
                 let self = this;
@@ -88,37 +106,31 @@ function new_app() {
                 }
 
                 file = file[0];
-                let reader = new FileReader();
-                reader.addEventListener("load", function () {
-                    self.post({
-                        action: 'upload',
-                        name: file.name,
-                        size: file.size,
-                        type: file.type,
-                        base64: reader.result
-                    }, function (json) {
-                        self.toast = json.msg + ' ' + json.time;
-                    });
-                }, false);
-                reader.readAsDataURL(file);
+
+                if (!/\.apk$/i.test(file.name)) {
+                    this.toast = '只允许上传安卓应用文件';
+                    return;
+                }
+
+                self.xhr(file, function (json) {
+                    self.toast = json.msg + ' ' + json.time;
+                });
             },
             send_key(key) {
                 let self = this;
-                this.post({action: 'send_key', key: key}, function (json) {
+                this.xhr({action: 'send_key', key: key}, function (json) {
                     self.toast = json.msg + ' ' + json.time;
                 });
             },
             send_text() {
                 let self = this;
-                this.post({action: 'send_text', text: this.text}, function (json) {
+                this.xhr({action: 'send_text', text: this.text}, function (json) {
                     self.toast = json.msg + ' ' + json.time;
                 });
             },
             play_url(url) {
                 let self = this;
-                url = url || this.media_url;
-                url += (url.indexOf("?") > -1 ? "&" : "?") + "file=media.mp4";
-                this.post({action: 'play_url', url: url}, function (json) {
+                this.xhr({action: 'play_url', url: url || this.media_url}, function (json) {
                     self.toast = json.msg + ' ' + json.time;
                 });
             }
