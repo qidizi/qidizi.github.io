@@ -8,10 +8,10 @@
     res = document.createElement('SCRIPT');
     res.src = "html.js";
     res.setAttribute('type', "text/javascript");
-    res.onload = function(){
+    res.onload = function () {
         // 加载vue js
         res = document.createElement('SCRIPT');
-        res.src = "https://cdn.jsdelivr.net/npm/vue";
+        res.src = 'https://cn.vuejs.org/js/vue.js';//"https://cdn.jsdelivr.net/npm/vue";
         res.setAttribute('type', "text/javascript");
         res.onload = new_app;
         document.getElementsByTagName('HEAD')[0].appendChild(res);
@@ -20,12 +20,20 @@
 }();
 
 function new_app() {
-    let app = new Vue({
+    window.app = new Vue({
         el: '#app',
         data: {
             toast: '',
-            media_url: 'http://dpv.videocc.net/e785b2c81c/5/e785b2c81c9e018296671a1287e99615_2.mp4?pid=1593798817820X1508665&a.mp4',
-            text: ''
+            media_url: '',
+            text: '',
+            media_list: []
+        },
+        mounted() {
+            // 加载播放列表
+            let res = document.createElement('SCRIPT');
+            res.src = "media.js";
+            res.setAttribute('type', "text/javascript");
+            document.getElementsByTagName('HEAD')[0].appendChild(res);
         },
         methods: {
             post(json, callback) {
@@ -108,9 +116,9 @@ function new_app() {
                 });
             }
             ,
-            play_url() {
+            play_url(url) {
                 let self = this;
-                this.post({action: 'play_url', url: this.media_url}, function (json) {
+                this.post({action: 'play_url', url: url || this.media_url}, function (json) {
                     self.toast = json.msg + ' ' + json.time;
                 });
             }
