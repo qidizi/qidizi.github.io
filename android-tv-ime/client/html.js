@@ -26,5 +26,10 @@ document.getElementById('app').innerHTML = `
 
 <input type="file" id="file_input" class="text_left file_input">
 <input type="submit" v-on:click="upload" class="btn_right">
+<ol class="media_list">
+<template v-for="nu in media_list">
+<li><a href="javascript:void(0);" v-html="nu[0]" v-on:click="play_url(nu[1]);"></a></li>
+</template>
+</ol>
 </div>
 `;
