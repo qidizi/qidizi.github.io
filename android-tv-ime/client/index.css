@@ -155,7 +155,24 @@ body {
 .file_input {
     height: 50px;
 }
-.media_list{
+
+.media_list {
     clear: both;
     text-align: left;
+}
+
+.to_top {
+    position: fixed;
+    bottom: 10px;
+    right: 0;
+    opacity: 0.7;
+    background-color: black;
+    color: white;
+    z-index: 1;
+    border-radius: 100%;
+}
+.filter{
+    width: 100%;
+    text-align: center;
+    padding: 5px;
 }
