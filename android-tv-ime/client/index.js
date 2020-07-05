@@ -118,7 +118,9 @@ function new_app() {
             ,
             play_url(url) {
                 let self = this;
-                this.post({action: 'play_url', url: url || this.media_url}, function (json) {
+                let url = url || this.media_url;
+                url += (url.indexOf("?") > -1 ? "&" : "?") + "file=media.mp4";
+                this.post({action: 'play_url', url: url}, function (json) {
                     self.toast = json.msg + ' ' + json.time;
                 });
             }
