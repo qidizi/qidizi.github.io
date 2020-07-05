@@ -8,12 +8,14 @@
     res = document.createElement('SCRIPT');
     res.src = "html.js";
     res.setAttribute('type', "text/javascript");
-    document.getElementsByTagName('HEAD')[0].appendChild(res);
-    // 加载vue js
-    res = document.createElement('SCRIPT');
-    res.src = "https://cdn.jsdelivr.net/npm/vue";
-    res.setAttribute('type', "text/javascript");
-    res.onload = new_app;
+    res.onload = function(){
+        // 加载vue js
+        res = document.createElement('SCRIPT');
+        res.src = "https://cdn.jsdelivr.net/npm/vue";
+        res.setAttribute('type', "text/javascript");
+        res.onload = new_app;
+        document.getElementsByTagName('HEAD')[0].appendChild(res);
+    };
     document.getElementsByTagName('HEAD')[0].appendChild(res);
 }();
 
