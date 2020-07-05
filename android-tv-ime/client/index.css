@@ -149,8 +149,13 @@ body {
     width: 0;
     height: 0;
     visibility: hidden;
+    float: none;
 }
 
 .file_input {
     height: 50px;
+}
+.media_list{
+    clear: both;
+    text-align: left;
 }
