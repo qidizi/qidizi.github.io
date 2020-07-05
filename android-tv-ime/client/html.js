@@ -26,10 +26,14 @@ document.getElementById('app').innerHTML = `
 
 <input type="file" id="file_input" class="text_left file_input">
 <input type="submit" v-on:click="upload" class="btn_right">
+<input v-model.trim="filter" class="filter" placeholder="输入关键字快速查找">
 <ol class="media_list">
 <template v-for="nu in media_list">
-<li><a href="javascript:void(0);" v-html="nu[0]" v-on:click="play_url(nu[1]);"></a></li>
+<li v-if="!filter || nu[0].toLowerCase().indexOf(filter.toLowerCase()) > -1">
+<a href="javascript:void(0);" v-html="nu[0]" v-on:click="play_url(nu[1]);"> </a>
+</li>
 </template>
 </ol>
+<i class="to_top" v-on:click="go_to_top">顶部</i>
 </div>
 `;
