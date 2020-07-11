@@ -1,4 +1,5 @@
 +function () {
+    let rnd = +new Date;
     let host = location.search.indexOf('?avd=1') > -1 ?
         "php.local.qidizi.com" : "www-public.qidizi.com";
     document.write(`
@@ -12,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>安卓tv控制器</title>
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="index.css?r=${rnd}" />
     <!--用异步加载js,否则chrome会阻止,通过document.write写入的-->
     <script src="https://cn.vuejs.org/js/vue.min.js" async"></script>
 </head>
@@ -52,8 +53,8 @@
     </ol>
     <i class="to_top" onclick="window.scrollTo(0, 0);">顶部</i>
 </div>
-<script src="index.js" type="text/javascript" async></script>
-<script src="media.js" type="text/javascript" async></script>
+<script src="index.js?r=${rnd}" type="text/javascript" async></script>
+<script src="media.js?r=${rnd}" type="text/javascript" async></script>
 </body>
 </html>
 `);

@@ -95,9 +95,7 @@
                     return;
                 }
 
-                self.xhr(file, function (json) {
-                    self.toast = json['msg'];
-                });
+                self.xhr(file);
             },
             "send_key"(key) {
                 this.xhr({action: 'send_key', key: key});
