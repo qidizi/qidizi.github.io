@@ -29,6 +29,7 @@ body {
     display: block;
     color: white;
     text-align: center;
+    user-select: none;
 }
 
 .pad_left {
@@ -106,6 +107,7 @@ body {
     line-height: 30px;
     font-size: 1rem;
     border-radius: 100%;
+    user-select: none;
 }
 
 .media_url {

@@ -1,6 +1,6 @@
 +function () {
     let rnd = +new Date;
-    let host = location.search.indexOf('?avd=1') > -1 ?
+    let host = '127.0.0.1' === location.hostname ?
         "php.local.qidizi.com" : "www-public.qidizi.com";
     document.write(`
 <!DOCTYPE html>
@@ -39,15 +39,15 @@
     <input type="button" class="btn_right" value="输入" @click="send_text">
 
     <textarea v-model.trim="media_url" class="media_url text_left"
-              placeholder="如 http://a.com?a.mp3,需要提供后缀来识别"> </textarea>
-    <input type="button" class="btn_right" value="播放" @click="play_url">
+              placeholder="如是网页请追加 __web__ 来识别"> </textarea>
+    <input type="button" class="btn_right" value="播放" @click="play_url()">
     <input type="file" id="file_input" class="text_left file_input">
     <input type="submit" class="btn_right" @click="upload">
     <input v-model.trim="filter" class="filter" placeholder="输入关键字快速查找">
     <ol class="media_list">
         <template v-for="nu in media_list">
             <li class="url" v-if="!filter || nu[0].toLowerCase().indexOf(filter.toLowerCase()) > -1">
-                <a href="javascript:void(0)" v-html="nu[0]" @click="play_url(nu[1])"> </a>
+                <a href="javascript:void(0)" v-html="nu[0]" @click="play_url(nu[1])" :title="nu[1]"> </a>
             </li>
         </template>
     </ol>
