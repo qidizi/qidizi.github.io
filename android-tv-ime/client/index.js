@@ -8,11 +8,12 @@
         el: '#app',
         data: {
             toast: '',
-            media_url: 'https://www.babakk.com/guochanju/meirenmubaishou/1-42.html?__web__',
+            media_url: '',
             text: '',
             media_list: [],
             filter: ''
         },
+        watch: {},
         methods: {
             set_media_list(str) {
                 let tmp = [];
@@ -106,19 +107,17 @@
             "play_url"(url) {
                 url = String(url || this.media_url).trim();
                 if (!url) return;
-                url += url.indexOf('?') > -1 ? '' : '?';
+                url += url.indexOf('?') > -1 ? '&ext=' : '?ext=';
 
-                if (url.toLowerCase().indexOf('.m3u8') > -1) {
-                    url += '&ext=m3u8';
-                } else if (0 === url.toLowerCase().indexOf('rtmp')) {
-                    url += '&ext=rtmp';
-                } else if (url.toLowerCase().indexOf('__web__') < 0 && url.toLowerCase().indexOf('ext=') < 0) {
-                    // 如果不是网页
-                    this.toast = '无法确定后缀名';
-                    return;
+                if (0 === url.toLowerCase().indexOf('rtmp')) {
+                    url += 'rtmp';
+                } else {
+                    let videos = ' mp2 mpa mpe mpeg mpg mpv2 mov qt lsf lsx asf asr asx avi movie mp4 m3u8 ts 3gp ' +
+                        'mov wmv m4v webm h264 h263 ';
+                    let ext = url.split('?')[0].replace(/^.*\.(\w{2,5})$/, '$1');
+                    url += videos.indexOf(' ' + ext + ' ') > -1 ? ext : '__web__';
                 }
 
-                // this.media_url = url;
                 this.xhr({action: 'play_url', url: url});
             }
         }

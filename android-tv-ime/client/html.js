@@ -27,7 +27,6 @@
         <i class="pad_down" @click.stop.prevent.self="send_key('KEYCODE_DPAD_DOWN')">下</i>
         <i class="pad_center" @click.stop.prevent.self="send_key('KEYCODE_DPAD_CENTER')">OK</i>
     </i>
-    <i class="key" @click.stop.prevent.self="send_key('KEYCODE_POWER')">电源</i>
     <i class="key" @click.stop.prevent.self="send_key('KEYCODE_MENU')">菜单</i>
     <i class="key home" @click.stop.prevent.self="send_key('KEYCODE_HOME')">主页</i>
     <i class="key back" @click.stop.prevent.self="send_key('KEYCODE_BACK')">返回</i>
@@ -54,7 +53,7 @@
     <i class="to_top" onclick="window.scrollTo(0, 0);">顶部</i>
 </div>
 <script src="index.js?r=${rnd}" type="text/javascript" async></script>
-<script src="media.js?r=${rnd}" type="text/javascript" async></script>
+<script src="http://www-public.qidizi.com/android-tv-ime/client/media.js?r=${rnd}" type="text/javascript" async></script>
 </body>
 </html>
 `);
