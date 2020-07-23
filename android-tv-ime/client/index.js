@@ -107,17 +107,19 @@
             "play_url"(url) {
                 url = String(url || this.media_url).trim();
                 if (!url) return;
-                url += url.indexOf('?') > -1 ? '&ext=' : '?ext=';
 
-                if (0 === url.toLowerCase().indexOf('rtmp')) {
-                    url += 'rtmp';
-                } else {
-                    let videos = ' mp2 mpa mpe mpeg mpg mpv2 mov qt lsf lsx asf asr asx avi movie mp4 m3u8 ts 3gp ' +
-                        'mov wmv m4v webm h264 h263 ';
-                    let ext = url.split('?')[0].replace(/^.*\.(\w{2,5})$/, '$1');
-                    url += videos.indexOf(' ' + ext + ' ') > -1 ? ext : '__web__';
+                if (url.indexOf('ext=') < 0) {
+                    url += url.indexOf('?') > -1 ? '&ext=' : '?ext=';
+
+                    if (0 === url.toLowerCase().indexOf('rtmp')) {
+                        url += 'rtmp';
+                    } else {
+                        let videos = ' mp2 mpa mpe mpeg mpg mpv2 mov qt lsf lsx asf asr asx avi movie mp4 m3u8 ts 3gp ' +
+                            'mov wmv m4v webm h264 h263 ';
+                        let ext = url.split('?')[0].replace(/^.*\.(\w{2,5})$/, '$1');
+                        url += videos.indexOf(' ' + ext + ' ') > -1 ? ext : '__web__';
+                    }
                 }
-
                 this.xhr({action: 'play_url', url: url});
             }
         }
