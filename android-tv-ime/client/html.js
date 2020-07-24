@@ -51,6 +51,7 @@
         </template>
     </ol>
     <i class="to_top" onclick="window.scrollTo(0, 0);">顶部</i>
+    <div class="mask" :style="mask_on ? '': 'display:none'"><div class="loader"><p></p></div></div>
 </div>
 <script src="index.js?r=${rnd}" type="text/javascript" async></script>
 <script src="http://www-public.qidizi.com/android-tv-ime/client/media.js?r=${rnd}" type="text/javascript" async></script>

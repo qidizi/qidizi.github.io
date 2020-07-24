@@ -11,7 +11,8 @@
             media_url: '',
             text: '',
             media_list: [],
-            filter: ''
+            filter: '',
+            mask_on: false,
         },
         watch: {},
         methods: {
@@ -73,8 +74,13 @@
                 let url = 'http://' + location.host + '/?';
                 // 如果是上传必须拼接出 /?file=1&
                 if (is_file)
-                    url += 'file=1&';
+                    url += 'file=' + data.size + '&';
                 url += 'r=' + +new Date;
+                xhr.onloadend = function () {
+                    self.mask_on = false;
+                };
+                this.toast = '请求中...';
+                this.mask_on = true;
                 xhr.open("POST", url);
                 if (!is_file)
                     xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
