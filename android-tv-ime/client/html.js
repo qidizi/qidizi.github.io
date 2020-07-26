@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="index.css?r=${rnd}"/>
     <!--用异步加载js,否则chrome会阻止,通过document.write写入的-->
-    <script src="https://cn.vuejs.org/js/vue.min.js" SameSite=None async></script>
+    <script src="https://cn.vuejs.org/js/vue.min.js" async></script>
 </head>
 <body>
 <div id="app">
