@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
     resize: none;
@@ -20,94 +21,97 @@ body {
     text-align: center;
 }
 
-.pad {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    border: 1px none red;
-    margin: 10px auto;
+.unselect {
+    user-select: none;
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.pad_btn {
+    width: 60px;
+    height: 60px;
+    background-color: black;
+    border-radius: 100%;
+    z-index: 0;
+    line-height: 60px;
+    position: absolute;
     display: block;
     color: white;
     text-align: center;
-    user-select: none;
+    cursor: pointer;
+    border: 0 none;
+    padding: 0;
 }
 
 .pad_left {
-    position: absolute;
-    top: 50px;
-    left: -10px;
-    width: 50px;
-    height: 50px;
-    background-color: black;
-    border-radius: 100% 0 0 0;
-    z-index: 0;
-    transform: rotate(-45deg);
-    line-height: 50px;
+    top: 0;
+    left: -101%;
 }
 
 .pad_up {
-    position: absolute;
-    top: -10px;
-    left: 50px;
-    width: 50px;
-    height: 50px;
-    background-color: black;
-    border-radius: 100% 0 0 0;
-    z-index: 0;
-    transform: rotate(45deg);
-    line-height: 50px;
+    top: -101%;
+    left: 0;
 }
 
 .pad_right {
-    position: absolute;
-    top: 50px;
-    right: -10px;
-    width: 50px;
-    height: 50px;
-    background-color: black;
-    border-radius: 100% 0 0 0;
-    z-index: 0;
-    transform: rotate(135deg);
-    line-height: 50px;
+    top: 0;
+    right: -102%;
 }
 
 .pad_down {
-    position: absolute;
-    bottom: -10px;
-    left: 50px;
-    width: 50px;
-    height: 50px;
-    background-color: black;
-    border-radius: 100% 0 0 0;
-    z-index: 0;
-    transform: rotate(225deg);
-    line-height: 50px;
+    bottom: -101%;
+    left: 0;
 }
 
 .pad_center {
-    top: 50px;
-    left: 50px;
-    width: 50px;
-    height: 50px;
-    background-color: mediumblue;
-    border-radius: 100%;
-    z-index: 1;
-    position: absolute;
-    line-height: 50px;
+    bottom: 0;
+    left: 0;
 }
 
-.key {
+.pad_box {
+    margin: 120px auto;
+    position: relative;
+}
+
+.pad_key {
     width: 30px;
     height: 30px;
-    margin: 5px;
-    display: inline-block;
-    background-color: black;
-    cursor: pointer;
-    color: white;
     line-height: 30px;
-    font-size: 1rem;
-    border-radius: 100%;
-    user-select: none;
+    font-size: 0.6rem;
+}
+
+.pad_vol_up {
+    top: -60%;
+    right: -180%;
+}
+
+.pad_mute {
+    top: 25%;
+    right: -180%;
+}
+
+.pad_vol_down {
+    bottom: -60%;
+    right: -180%;
+}
+
+.pad_menu {
+    left: -180%;
+    top: -60%;
+}
+
+.pad_home {
+    left: -180%;
+    top: 25%;
+}
+
+.pad_back {
+    left: -180%;
+    bottom: -60%;
 }
 
 .media_url {
@@ -142,13 +146,13 @@ body {
 
 .text_left {
     float: left;
-    width: 90%;
+    width: 80%;
     margin-bottom: 10px;
 }
 
 .btn_right {
     float: right;
-    width: 10%;
+    width: 20%;
     height: 50px;
 }
 

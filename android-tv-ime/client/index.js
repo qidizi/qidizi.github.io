@@ -1,3 +1,4 @@
+
 +function new_app() {
     if (!window['Vue']) {
         setTimeout(new_app, 1);
@@ -81,6 +82,10 @@
                 };
                 this.toast = '请求中...';
                 this.mask_on = true;
+                xhr.upload.addEventListener('progress', function (e) {
+                    if (!is_file) return;
+                    self.toast = '上传 ' + (e.loaded / e.total) * 100 + '%';
+                })
                 xhr.open("POST", url);
                 if (!is_file)
                     xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
