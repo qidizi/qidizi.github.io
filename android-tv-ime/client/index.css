@@ -86,7 +86,7 @@ body {
 
 .pad_vol_up {
     top: -40px;
-    right: -170%;
+    right: -200%;
 }
 
 .pad_mute {
@@ -96,11 +96,11 @@ body {
 
 .pad_vol_down {
     bottom: -40px;
-    right: -170%;
+    right: -200%;
 }
 
 .pad_menu {
-    left: -170%;
+    left: -200%;
     top: -40px;
 }
 
@@ -110,7 +110,7 @@ body {
 }
 
 .pad_back {
-    left: -170%;
+    left: -200%;
     bottom: -40px;
 }
 
