@@ -78,40 +78,40 @@ body {
 }
 
 .pad_key {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 0.6rem;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1rem;
 }
 
 .pad_vol_up {
-    top: -60%;
-    right: -180%;
+    top: -40px;
+    right: -170%;
 }
 
 .pad_mute {
-    top: 25%;
-    right: -180%;
+    top: 10px;
+    right: -200%;
 }
 
 .pad_vol_down {
-    bottom: -60%;
-    right: -180%;
+    bottom: -40px;
+    right: -170%;
 }
 
 .pad_menu {
-    left: -180%;
-    top: -60%;
+    left: -170%;
+    top: -40px;
 }
 
 .pad_home {
-    left: -180%;
-    top: 25%;
+    left: -200%;
+    top: 10px;
 }
 
 .pad_back {
-    left: -180%;
-    bottom: -60%;
+    left: -170%;
+    bottom: -40px;
 }
 
 .media_url {
